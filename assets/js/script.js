@@ -18,7 +18,9 @@ $(document).ready(function(){
 			
 			for (var i = 0; i < (total / workTime); i++) {
 				nextTime = start + workTime;
-
+				if (nextTime >= end) {
+					min = 0;
+				}
 				intervals[i] = formateTime((start * 60) + (min * 60)) +' - '+ formateTime((nextTime * 60) + (min * 60)) + '<br />';
 				seconds = ((nextTime * 60) + pause) * 60 ;
 				data = secondsTimeSpanToHMS(seconds);
