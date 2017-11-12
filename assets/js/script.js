@@ -4,14 +4,10 @@ $(document).ready(function(){
 		e.preventDefault();
 		var intervals = data = [];
 
-		var start 	= parseInt($('#start').val());
-		var end 	= parseInt($('#end').val());
+		var start 	= $('#start').val().split(':');
+		var end 	= $('#end').val().split(':');
 		var workTime = parseInt($('#wt').val());
 		var pause = parseInt($('#pause').val());
-		start = '08:15'.split(':');
-		end = '12:15'.split(':');
-		workTime = 120;
-		pause = 15;
 		var nextTime;
 		start = parseInt(start[0] * 60) + parseInt(start[1]);
 		end = parseInt(end[0] * 60) + parseInt(end[1]);
@@ -52,5 +48,5 @@ function formateTime(s) {
     s -= h*3600;
     var m = Math.floor(s/60); //Get remaining minutes
     s -= m*60;
-    return h+':'+m+':'+s; //zero padding on minutes and seconds
+    return h+':'+m; //zero padding on minutes and seconds
 }
