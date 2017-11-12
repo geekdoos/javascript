@@ -8,9 +8,14 @@ $(document).ready(function(){
 		var end 	= parseInt($('#end').val());
 		var workTime = parseInt($('#wt').val());
 		var pause = parseInt($('#pause').val());
-
+		start = '08:15'.split(':');
+		end = '12:15'.split(':');
+		workTime = 120;
+		pause = 15;
 		var nextTime;
-
+		start = parseInt(start[0] * 60) + parseInt(start[1]);
+		end = parseInt(end[0] * 60) + parseInt(end[1]);
+		
 		if (start < end) {
 			var total = end - start;
 			var min = 00;
@@ -18,9 +23,10 @@ $(document).ready(function(){
 			for (var i = 0; i < (total / workTime); i++) {
 				nextTime = start + workTime;
 
-				intervals[i] = formateTime((start * 3600) + min * 60) +' - '+ formateTime((nextTime * 3600) + (min * 60)) + '<br />';
+				intervals[i] = formateTime((start * 60) + (min * 60)) +' - '+ formateTime((nextTime * 60) + (min * 60)) + '<br />';
 				seconds = ((nextTime * 60) + pause) * 60 ;
 				data = secondsTimeSpanToHMS(seconds);
+
 				start = data[0];
 				min = data[1];
 			}
@@ -38,7 +44,7 @@ function secondsTimeSpanToHMS(s) {
     s -= h*3600;
     var m = Math.floor(s/60); //Get remaining minutes
     s -= m*60;
-    return [h, m]; //zero padding on minutes and seconds
+    return [h, m, s]; //zero padding on minutes and seconds
 }
 
 function formateTime(s) {
@@ -46,5 +52,5 @@ function formateTime(s) {
     s -= h*3600;
     var m = Math.floor(s/60); //Get remaining minutes
     s -= m*60;
-    return h+':'+m; //zero padding on minutes and seconds
+    return h+':'+m+':'+s; //zero padding on minutes and seconds
 }
