@@ -3,18 +3,21 @@ $(document).ready(function(){
 	$('#submitBnt').click(function(e){
 		e.preventDefault();
 		var intervals = data = [];
-		var pause = parseInt($('#start').val());
-		var workTime = parseInt($('#start').val());
+
 		var start 	= parseInt($('#start').val());
 		var end 	= parseInt($('#end').val());
+		var workTime = parseInt($('#wt').val());
+		var pause = parseInt($('#pause').val());
+
 		var nextTime;
+
 		if (start < end) {
 			var total = end - start;
 			var min = 00;
 			
 			for (var i = 0; i < (total / workTime); i++) {
 				nextTime = start + workTime;
-				alert(nextTime+' -- '+end);
+
 				intervals[i] = formateTime((start * 3600) + min * 60) +' - '+ formateTime((nextTime * 3600) + (min * 60)) + '<br />';
 				seconds = ((nextTime * 60) + pause) * 60 ;
 				data = secondsTimeSpanToHMS(seconds);
